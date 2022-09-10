@@ -58,6 +58,19 @@ int is_game_won_vertical(GameState gamestate)
     return 0;
 }
 
+int is_plays_remaining(GameState gamestate)
+{
+    int i, j, is_play_possible = 0;
+    for (j = 0; j < GAME_HEIGHT_TILES; j++)
+        for (i = 0; i < GAME_WIDTH_TILES; i++)
+            is_play_possible = is_play_possible || (gamestate[i][j] == ' ');
+
+    if (is_play_possible)
+        return 0;
+    else
+        return 3;
+}
+
 // this returns 0 if it's not finished, 1 if x won, 2 if o won, 3 if it's a draw
 int is_game_finished(GameState gamestate)
 {
@@ -69,6 +82,8 @@ int is_game_finished(GameState gamestate)
     else if (result = is_game_won_diagonal(gamestate))
         return result;
     else if (result = is_game_won_antidiagonal(gamestate))
+        return result;
+    else if (result = is_plays_remaining(gamestate))
         return result;
     else
         return result;

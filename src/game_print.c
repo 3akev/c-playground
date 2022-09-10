@@ -17,10 +17,15 @@ void print_game_state(GameState gamestate)
     }
 }
 
-void print_game(GameState gamestate, int player_index)
+void print_game(GameState gamestate)
 {
     printf("\e[1;1H\e[2J"); // clears the screen
     printf("Tic-Tac-Toe\n");
     print_game_state(gamestate);
+}
+
+void receive_player_input(int player_index, int *choice)
+{
     printf("[%c] Choose your move(1-9): ", Players[player_index]);
+    scanf("%d", choice);
 }
