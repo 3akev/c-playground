@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "consts.h"
+#include "win_check.c"
 
 void initialise_game(GameState gamestate)
 {
@@ -9,17 +10,17 @@ void initialise_game(GameState gamestate)
             gamestate[i][j] = ' ';
 }
 
-void mainloop()
+void mainloop(GameState gamestate)
 {
-    while (1)
+    while (is_game_finished(gamestate))
     {
     }
 }
 
 int main()
 {
-    printf("TicTacToe, I guess lol");
+    printf("TicTacToe, I guess lol\n");
     GameState gamestate;
     initialise_game(gamestate);
-    mainloop();
+    mainloop(gamestate);
 }
