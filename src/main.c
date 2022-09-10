@@ -5,8 +5,8 @@
 void initialise_game(GameState gamestate)
 {
     int i, j;
-    for (i = 0; i < GAME_WIDTH_TILES; i++)
-        for (j = 0; j < GAME_HEIGHT_TILES; j++)
+    for (j = 0; j < GAME_HEIGHT_TILES; j++)
+        for (i = 0; i < GAME_WIDTH_TILES; i++)
             gamestate[i][j] = ' ';
 }
 

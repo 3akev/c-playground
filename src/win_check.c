@@ -12,10 +12,10 @@ int is_game_finished_vertical(GameState gamestate)
 {
     int i, j, player_i;
     for (player_i = 0; player_i < NUM_PLAYERS; player_i++)
-        for (i = 0; i < GAME_WIDTH_TILES; i++)
+        for (j = 0; j < GAME_HEIGHT_TILES; j++)
         {
             int won = 1;
-            for (j = 0; j < GAME_HEIGHT_TILES; j++)
+            for (i = 0; i < GAME_WIDTH_TILES; i++)
                 won = won && (gamestate[i][j] == Players[player_i]);
 
             if (won)
