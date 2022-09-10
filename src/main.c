@@ -3,6 +3,18 @@
 #include "win_check.c"
 #include "game_print.c"
 
+void make_move(GameState gamestate, int choice, char player)
+{
+    // reverse through the calculation used to enumerate each box, which is
+    // (3*j + i + 1)
+    // to obtain the correct indices
+    choice--;
+    int j = choice / 3;
+    int i = choice - 3 * j;
+
+    gamestate[i][j] = player;
+}
+
 void initialise_game(GameState gamestate)
 {
     int i, j;
@@ -14,16 +26,22 @@ void initialise_game(GameState gamestate)
 void mainloop(GameState gamestate)
 {
     int winner = 0;
+    int player_index = 1;
     while (!(winner = is_game_finished(gamestate)))
     {
-        clear_screen();
-        printf("Tic-Tac-Toe\n");
-        print_game_state(gamestate);
+        player_index = !player_index;
+        print_game(gamestate, player_index);
 
         int choice;
-        printf("Choose your move(1-9): ");
         scanf("%d", &choice);
+
+        if (choice >= 1 && choice <= 9)
+            make_move(gamestate, choice, Players[player_index]);
+        else
+            player_index = !player_index; // if invalid input, flip player index twice to remain with the same player
     }
+    print_game(gamestate, player_index);
+    printf("Player %c won the game!", Players[player_index]);
 }
 
 int main()
@@ -31,4 +49,6 @@ int main()
     GameState gamestate;
     initialise_game(gamestate);
     mainloop(gamestate);
+
+    return 0;
 }
