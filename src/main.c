@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "consts.h"
 #include "win_check.c"
+#include "game_print.c"
 
 void initialise_game(GameState gamestate)
 {
@@ -12,14 +13,21 @@ void initialise_game(GameState gamestate)
 
 void mainloop(GameState gamestate)
 {
-    while (is_game_finished(gamestate))
+    int winner = 0;
+    while (!(winner = is_game_finished(gamestate)))
     {
+        clear_screen();
+        printf("Tic-Tac-Toe\n");
+        print_game_state(gamestate);
+
+        int choice;
+        printf("Choose your move(1-9): ");
+        scanf("%d", &choice);
     }
 }
 
 int main()
 {
-    printf("TicTacToe, I guess lol\n");
     GameState gamestate;
     initialise_game(gamestate);
     mainloop(gamestate);
