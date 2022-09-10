@@ -4,10 +4,11 @@
 
 MU_TEST_SUITE(test_suite)
 {
-    MU_RUN_TEST(test_is_game_finished_vertical);
-    MU_RUN_TEST(test_is_game_finished_horizontal);
-    MU_RUN_TEST(test_is_game_finished_diagonal);
-    MU_RUN_TEST(test_is_game_finished_antidiagonal);
+    MU_RUN_TEST(test_is_game_won_vertical);
+    MU_RUN_TEST(test_is_game_won_horizontal);
+    MU_RUN_TEST(test_is_game_won_diagonal);
+    MU_RUN_TEST(test_is_game_won_antidiagonal);
+    MU_RUN_TEST(test_is_game_finished);
 }
 
 int main(int argc, char *argv[])

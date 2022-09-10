@@ -1,6 +1,6 @@
 #include "consts.h"
 
-int is_game_finished_antidiagonal(GameState gamestate)
+int is_game_won_antidiagonal(GameState gamestate)
 {
     int player_index;
     for (player_index = 0; player_index < NUM_PLAYERS; player_index++)
@@ -12,7 +12,7 @@ int is_game_finished_antidiagonal(GameState gamestate)
     return 0;
 }
 
-int is_game_finished_diagonal(GameState gamestate)
+int is_game_won_diagonal(GameState gamestate)
 {
     int player_index;
     for (player_index = 0; player_index < NUM_PLAYERS; player_index++)
@@ -24,7 +24,7 @@ int is_game_finished_diagonal(GameState gamestate)
     return 0;
 }
 
-int is_game_finished_horizontal(GameState gamestate)
+int is_game_won_horizontal(GameState gamestate)
 {
     int i, j, player_index;
     for (player_index = 0; player_index < NUM_PLAYERS; player_index++)
@@ -41,7 +41,7 @@ int is_game_finished_horizontal(GameState gamestate)
     return 0;
 }
 
-int is_game_finished_vertical(GameState gamestate)
+int is_game_won_vertical(GameState gamestate)
 {
     int i, j, player_index;
     for (player_index = 0; player_index < NUM_PLAYERS; player_index++)
@@ -58,17 +58,17 @@ int is_game_finished_vertical(GameState gamestate)
     return 0;
 }
 
-// this returns 0 if it's not finished, 1 if x won, 2 if o won
+// this returns 0 if it's not finished, 1 if x won, 2 if o won, 3 if it's a draw
 int is_game_finished(GameState gamestate)
 {
     int result = 0;
-    if (result = is_game_finished_vertical(gamestate))
+    if (result = is_game_won_vertical(gamestate))
         return result;
-    else if (result = is_game_finished_horizontal(gamestate))
+    else if (result = is_game_won_horizontal(gamestate))
         return result;
-    else if (result = is_game_finished_diagonal(gamestate))
+    else if (result = is_game_won_diagonal(gamestate))
         return result;
-    else if (result = is_game_finished_antidiagonal(gamestate))
+    else if (result = is_game_won_antidiagonal(gamestate))
         return result;
     else
         return result;

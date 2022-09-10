@@ -2,11 +2,11 @@
 #include "../src/consts.h"
 #include "../src/win_check.c"
 
-#define TEST_IS_GAME_FINISHED_VERTICAL_ARRAY_SIZE 4
+#define TEST_IS_GAME_WON_VERTICAL_ARRAY_SIZE 4
 
-MU_TEST(test_is_game_finished_vertical)
+MU_TEST(test_is_game_won_vertical)
 {
-    GameState gamestates[TEST_IS_GAME_FINISHED_VERTICAL_ARRAY_SIZE] = {
+    GameState gamestates[TEST_IS_GAME_WON_VERTICAL_ARRAY_SIZE] = {
         {{'x', ' ', ' '},
          {'x', ' ', ' '},
          {'x', ' ', ' '}},
@@ -19,18 +19,18 @@ MU_TEST(test_is_game_finished_vertical)
         {{' ', ' ', 'x'},
          {' ', ' ', 'o'},
          {' ', ' ', 'o'}}};
-    int expected[TEST_IS_GAME_FINISHED_VERTICAL_ARRAY_SIZE] = {1, 2, 2, 0};
+    int expected[TEST_IS_GAME_WON_VERTICAL_ARRAY_SIZE] = {1, 2, 2, 0};
 
     int i;
-    for (i = 0; i < TEST_IS_GAME_FINISHED_VERTICAL_ARRAY_SIZE; i++)
-        mu_assert(is_game_finished_vertical(gamestates[i]) == expected[i], "Error, incorrect win check! (vertical)");
+    for (i = 0; i < TEST_IS_GAME_WON_VERTICAL_ARRAY_SIZE; i++)
+        mu_assert(is_game_won_vertical(gamestates[i]) == expected[i], "Error, incorrect win check! (vertical)");
 }
 
-#define TEST_IS_GAME_FINISHED_HORIZONTAL_ARRAY_SIZE 4
+#define TEST_IS_GAME_WON_HORIZONTAL_ARRAY_SIZE 4
 
-MU_TEST(test_is_game_finished_horizontal)
+MU_TEST(test_is_game_won_horizontal)
 {
-    GameState gamestates[TEST_IS_GAME_FINISHED_HORIZONTAL_ARRAY_SIZE] = {
+    GameState gamestates[TEST_IS_GAME_WON_HORIZONTAL_ARRAY_SIZE] = {
         {{'x', 'x', 'x'},
          {' ', ' ', ' '},
          {' ', ' ', ' '}},
@@ -43,18 +43,18 @@ MU_TEST(test_is_game_finished_horizontal)
         {{' ', 'x', ' '},
          {'o', 'o', 'x'},
          {'x', 'x', 'o'}}};
-    int expected[TEST_IS_GAME_FINISHED_HORIZONTAL_ARRAY_SIZE] = {1, 2, 2, 0};
+    int expected[TEST_IS_GAME_WON_HORIZONTAL_ARRAY_SIZE] = {1, 2, 2, 0};
 
     int i;
-    for (i = 0; i < TEST_IS_GAME_FINISHED_HORIZONTAL_ARRAY_SIZE; i++)
-        mu_assert(is_game_finished_horizontal(gamestates[i]) == expected[i], "Error, incorrect win check! (horizontal)");
+    for (i = 0; i < TEST_IS_GAME_WON_HORIZONTAL_ARRAY_SIZE; i++)
+        mu_assert(is_game_won_horizontal(gamestates[i]) == expected[i], "Error, incorrect win check! (horizontal)");
 }
 
-#define TEST_IS_GAME_FINISHED_DIAGONAL_ARRAY_SIZE 3
+#define TEST_IS_GAME_WON_DIAGONAL_ARRAY_SIZE 3
 
-MU_TEST(test_is_game_finished_diagonal)
+MU_TEST(test_is_game_won_diagonal)
 {
-    GameState gamestates[TEST_IS_GAME_FINISHED_DIAGONAL_ARRAY_SIZE] = {
+    GameState gamestates[TEST_IS_GAME_WON_DIAGONAL_ARRAY_SIZE] = {
         {{'x', ' ', 'x'},
          {' ', 'x', ' '},
          {' ', ' ', 'x'}},
@@ -64,18 +64,18 @@ MU_TEST(test_is_game_finished_diagonal)
         {{' ', 'x', ' '},
          {'o', 'o', 'x'},
          {'x', 'x', 'o'}}};
-    int expected[TEST_IS_GAME_FINISHED_DIAGONAL_ARRAY_SIZE] = {1, 2, 0};
+    int expected[TEST_IS_GAME_WON_DIAGONAL_ARRAY_SIZE] = {1, 2, 0};
 
     int i;
-    for (i = 0; i < TEST_IS_GAME_FINISHED_DIAGONAL_ARRAY_SIZE; i++)
-        mu_assert(is_game_finished_diagonal(gamestates[i]) == expected[i], "Error, incorrect win check! (diagonal)");
+    for (i = 0; i < TEST_IS_GAME_WON_DIAGONAL_ARRAY_SIZE; i++)
+        mu_assert(is_game_won_diagonal(gamestates[i]) == expected[i], "Error, incorrect win check! (diagonal)");
 }
 
-#define TEST_IS_GAME_FINISHED_ANTIDIAGONAL_ARRAY_SIZE 3
+#define TEST_IS_GAME_WON_ANTIDIAGONAL_ARRAY_SIZE 3
 
-MU_TEST(test_is_game_finished_antidiagonal)
+MU_TEST(test_is_game_won_antidiagonal)
 {
-    GameState gamestates[TEST_IS_GAME_FINISHED_ANTIDIAGONAL_ARRAY_SIZE] = {
+    GameState gamestates[TEST_IS_GAME_WON_ANTIDIAGONAL_ARRAY_SIZE] = {
         {{'x', ' ', 'x'},
          {' ', 'x', ' '},
          {'x', ' ', ' '}},
@@ -85,11 +85,11 @@ MU_TEST(test_is_game_finished_antidiagonal)
         {{' ', 'x', ' '},
          {'o', 'o', 'x'},
          {'x', 'x', 'o'}}};
-    int expected[TEST_IS_GAME_FINISHED_ANTIDIAGONAL_ARRAY_SIZE] = {1, 2, 0};
+    int expected[TEST_IS_GAME_WON_ANTIDIAGONAL_ARRAY_SIZE] = {1, 2, 0};
 
     int i;
-    for (i = 0; i < TEST_IS_GAME_FINISHED_ANTIDIAGONAL_ARRAY_SIZE; i++)
-        mu_assert(is_game_finished_antidiagonal(gamestates[i]) == expected[i], "Error, incorrect win check! (antidiagonal)");
+    for (i = 0; i < TEST_IS_GAME_WON_ANTIDIAGONAL_ARRAY_SIZE; i++)
+        mu_assert(is_game_won_antidiagonal(gamestates[i]) == expected[i], "Error, incorrect win check! (antidiagonal)");
 }
 
 #define TEST_IS_GAME_FINISHED_ARRAY_SIZE 5
