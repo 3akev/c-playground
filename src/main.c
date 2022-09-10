@@ -41,7 +41,7 @@ void mainloop(GameState gamestate)
             player_index = !player_index; // if invalid input, flip player index twice to remain with the same player
     }
     print_game(gamestate);
-    if (winner >= 0 && winner <= NUM_PLAYERS)
+    if (winner > 0 && winner <= NUM_PLAYERS)
         printf("Player %c won the game!", Players[player_index]);
     else
         printf("It's a draw!");
