@@ -25,14 +25,14 @@
         },
         {
             "type": "cppbuild",
-            "label": "Build main.c",
+            "label": "Build tic_tac_toe.c",
             "command": "/usr/bin/gcc",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/src/main.c",
+                "${workspaceFolder}/src/tic_tac_toe.c",
                 "-o",
-                "${workspaceFolder}/build/main"
+                "${workspaceFolder}/build/tic_tac_toe"
             ],
             "options": {
                 "cwd": "${fileDirname}"

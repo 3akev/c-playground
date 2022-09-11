@@ -27,7 +27,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build main.c"
+            "preLaunchTask": "Build tic_tac_toe.c"
         },
         {
             "name": "Run tests",
