@@ -42,9 +42,9 @@ void mainloop(GameState gamestate)
     }
     print_game(gamestate);
     if (winner > 0 && winner <= NUM_PLAYERS)
-        printf("Player %c won the game!", Players[player_index]);
+        printf("Player %c won the game!\n", Players[player_index]);
     else
-        printf("It's a draw!");
+        printf("It's a draw!\n");
 }
 
 int main()
@@ -52,6 +52,5 @@ int main()
     GameState gamestate;
     initialise_game(gamestate);
     mainloop(gamestate);
-
     return 0;
 }
