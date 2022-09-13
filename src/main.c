@@ -1,24 +1,30 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "consts.h"
 #include "game_print.c"
 
-void initialise_game_map(GameMap gameMap) {
-    int i, j;
-    for(i=0;i<GAME_MAP_WIDTH;i++)
-        for(j=0;j<GAME_MAP_HEIGHT;j++)
-            gameMap[i][j] = ' ';
+void initialise_game_state(struct GameState *gameState) {
+    struct Snake segment;
+    srand(time(NULL));
+    gameState->snakeHead.pos_x = GAME_MAP_WIDTH/2;
+    gameState->snakeHead.pos_y = GAME_MAP_HEIGHT/2;
+    gameState->snakeHead.direction = rand() % 4;
+    gameState->snakeHead.next = &segment;
+    segment.pos_x = GAME_MAP_WIDTH/2;
+    segment.pos_y = GAME_MAP_HEIGHT/2;
 }
 
-void mainloop(GameMap gameMap) {
+void mainloop(struct GameState *gameState) {
     while(1) {
-        print_game(gameMap);
+        print_game(gameState);
         int x;
         scanf("%d", &x);
     }
 }
 
 int main() {
-    GameMap gameMap;
-    initialise_game_map(gameMap);
-    mainloop(gameMap);
+    struct GameState gameState;
+    initialise_game_state(&gameState);
+    mainloop(&gameState);
 }

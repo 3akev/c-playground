@@ -12,10 +12,7 @@ char* mult_char(char a, int x) {
     return string;
 }
 
-void print_game(GameMap gameMap) {
-    printf("\e[1;1H\e[2J"); // clears the screen
-    printf("Snake Game\n");
-
+void print_map(GameMap gameMap) {
     char *horizontal_border = mult_char('#', GAME_MAP_WIDTH+2);
     printf("%s\n", horizontal_border);
     int i, j;
@@ -26,4 +23,32 @@ void print_game(GameMap gameMap) {
         printf("#\n");
     }
     printf("%s", horizontal_border);
+}
+
+void clear_map(GameMap gameMap) {
+    int i, j;
+    for(i=0;i<GAME_MAP_WIDTH;i++)
+        for(j=0;j<GAME_MAP_HEIGHT;j++)
+            gameMap[i][j] = ' ';
+}
+
+void draw_snake(struct GameState *gameState) {
+    struct Snake *segment = &gameState->snakeHead;
+    while(segment != NULL) {
+        int x = segment->pos_x;
+        int y = segment->pos_y;
+        gameState->gameMap[x][y] = 'o';
+        segment = segment->next;
+    }
+}
+
+void print_game(struct GameState *gameState) {
+    printf("\e[1;1H\e[2J"); // clears the screen
+    printf("Snake Game\n");
+
+    clear_map(gameState->gameMap);
+
+    draw_snake(gameState);
+
+    print_map(gameState->gameMap);
 }
