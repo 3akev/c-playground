@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "consts.h"
+#include "game_print.h"
 
 char* mult_char(char a, int x) {
     char *string;
@@ -22,7 +22,8 @@ void print_map(GameMap gameMap) {
             printf("%c", gameMap[i][j]);
         printf("#\n");
     }
-    printf("%s", horizontal_border);
+    printf("%s\n", horizontal_border);
+    free(horizontal_border);
 }
 
 void clear_map(GameMap gameMap) {
@@ -32,17 +33,17 @@ void clear_map(GameMap gameMap) {
             gameMap[i][j] = ' ';
 }
 
-void draw_snake(struct GameState *gameState) {
-    struct Snake *segment = &gameState->snakeHead;
+void draw_snake(GameState *gameState) {
+    Snake *segment = &gameState->snakeHead;
     while(segment != NULL) {
-        int x = segment->pos_x;
-        int y = segment->pos_y;
+        int x = segment->position.x;
+        int y = segment->position.y;
         gameState->gameMap[x][y] = 'o';
         segment = segment->next;
     }
 }
 
-void print_game(struct GameState *gameState) {
+void print_game(GameState *gameState) {
     printf("\e[1;1H\e[2J"); // clears the screen
     printf("Snake Game\n");
 
