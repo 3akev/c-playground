@@ -1,4 +1,5 @@
-#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 #include "logic.h"
 
 // 0=UP, 1=RIGHT, 2=DOWN, 3=LEFT
@@ -23,4 +24,23 @@ void move_snake(GameState *gameState) {
 
     gameState->snakeHead.position.x += vector.x;
     gameState->snakeHead.position.y += vector.y;
+}
+
+void read_input(Snake *snakeHead) {
+    char x;
+    read(STDIN_FILENO, &x, 1);
+    switch(x) {
+        case 'w':
+            snakeHead->direction = 0;
+            break;
+        case 'a':
+            snakeHead->direction = 3;
+            break;
+        case 's':
+            snakeHead->direction = 2;
+            break;
+        case 'd':
+            snakeHead->direction = 1;
+            break;
+    }
 }

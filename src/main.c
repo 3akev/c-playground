@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include "termios.h"
 #include "consts.h"
 #include "game_print.h"
 #include "logic.h"
@@ -25,13 +26,26 @@ void pause_for(int milliseconds) {
 
 void mainloop(GameState *gameState) {
     while(1) {
+        read_input(&gameState->snakeHead);
         move_snake(gameState);
         print_game(gameState);
         pause_for(500);
     }
 }
 
+// This enables raw mode to allow capturing input without blocking the terminal
+// derived from https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
+void enableRawMode() {
+    struct termios raw;
+    tcgetattr(STDIN_FILENO, &raw);
+    raw.c_lflag &= ~(ECHO | ICANON);
+    raw.c_cc[VMIN] = 0;
+    raw.c_cc[VTIME] = 0;
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}
+
 int main() {
+    enableRawMode();
     GameState gameState;
     initialise_game_state(&gameState);
     mainloop(&gameState);

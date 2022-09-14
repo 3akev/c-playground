@@ -5,6 +5,8 @@
 
 extern const Point Direction[4];
 
+void read_input(Snake *snakeHead);
+
 void move_snake(GameState *gameState);
 
 #endif //SNAKE_GAME_LOGIC_H
