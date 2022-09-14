@@ -33,10 +33,17 @@ void mainloop(GameState *gameState) {
     }
 }
 
+struct termios orig_termios;
+void disableRawMode() {
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+}
+
 // This enables raw mode to allow capturing input without blocking the terminal
 // derived from https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
 void enableRawMode() {
-    struct termios raw;
+    tcgetattr(STDIN_FILENO, &orig_termios);
+    atexit(disableRawMode);
+    struct termios raw = orig_termios;
     tcgetattr(STDIN_FILENO, &raw);
     raw.c_lflag &= ~(ECHO | ICANON);
     raw.c_cc[VMIN] = 0;
