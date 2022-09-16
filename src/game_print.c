@@ -25,14 +25,14 @@ void print_single_wall() {
 void print_char(char c) {
     printf("\033[");
     switch(c) {
-        case 'o':
-            printf("32");
+        case SNAKE_DISPLAY_CHAR:
+            printf("32"); // green
             break;
-        case '*':
-            printf("31");
+        case APPLE_DISPLAY_CHAR:
+            printf("31"); // red
             break;
         default:
-            printf("0");
+            printf("0"); // white
             break;
     }
     printf("m%c", c);
@@ -64,13 +64,13 @@ void draw_snake(GameState *gameState) {
     while (segment != NULL) {
         int x = segment->position.x;
         int y = segment->position.y;
-        gameState->gameMap[x][y] = 'o';
+        gameState->gameMap[x][y] = SNAKE_DISPLAY_CHAR;
         segment = segment->next;
     }
 }
 
 void draw_apple(GameState *gameState) {
-    gameState->gameMap[gameState->apple->x][gameState->apple->y] = '*';
+    gameState->gameMap[gameState->apple->x][gameState->apple->y] = APPLE_DISPLAY_CHAR;
 }
 
 void print_game(GameState *gameState) {

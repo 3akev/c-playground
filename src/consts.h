@@ -4,6 +4,9 @@
 #define GAME_MAP_WIDTH 32
 #define GAME_MAP_HEIGHT 16
 
+#define APPLE_DISPLAY_CHAR '*'
+#define SNAKE_DISPLAY_CHAR 'o'
+
 typedef char GameMap[GAME_MAP_WIDTH][GAME_MAP_HEIGHT];
 
 typedef struct PointStruct {
