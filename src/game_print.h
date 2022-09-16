@@ -5,4 +5,6 @@
 
 void print_game(GameState *gameState);
 
+void initialise_printing();
+
 #endif //SNAKE_GAME_GAME_PRINT_H

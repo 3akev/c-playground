@@ -55,5 +55,6 @@ int main() {
     enableRawMode();
     GameState gameState;
     initialise_game_state(&gameState);
+    initialise_printing();
     mainloop(&gameState);
 }
