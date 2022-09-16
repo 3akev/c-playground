@@ -22,7 +22,7 @@ void check_for_collisions(GameState *gameState) {
     newSnakePosition.x += vector.x;
     newSnakePosition.y += vector.y;
 
-    if(newSnakePosition.x < 0 || newSnakePosition.x > GAME_MAP_WIDTH || newSnakePosition.y < 0 || newSnakePosition.y > GAME_MAP_HEIGHT) {
+    if(newSnakePosition.x < 0 || newSnakePosition.x >= GAME_MAP_WIDTH || newSnakePosition.y < 0 || newSnakePosition.y >= GAME_MAP_HEIGHT) {
         gameState->isAlive = 0;
         return;
     }

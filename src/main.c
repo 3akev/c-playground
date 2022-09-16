@@ -31,13 +31,14 @@ void pause_for(int milliseconds) {
 
 void mainloop(GameState *gameState) {
     while(gameState->isAlive) {
+        pause_for(200);
         read_input(&gameState->snakeHead);
         check_for_collisions(gameState);
-        move_snake(gameState);
+        if(gameState->isAlive)
+            move_snake(gameState);
         if(gameState->apple == NULL)
             place_apple(gameState);
         print_game(gameState);
-        pause_for(200);
     }
     printf("GAME OVER!\n");
 }
