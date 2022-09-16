@@ -10,16 +10,29 @@ void initialise_printing() {
     horizontal_border[i] = 0;
 }
 
+void print_horizontal_border() {
+    printf("\033[47m"
+           "%s"
+           "\033[m\n", horizontal_border);
+}
+
+void print_single_wall() {
+    printf("\033[47m"
+           "#"
+           "\033[m");
+}
+
 void print_map(GameMap gameMap) {
-    printf("%s\n", horizontal_border);
+    print_horizontal_border();
     int i, j;
     for (j = 0; j < GAME_MAP_HEIGHT; j++) {
-        printf("#");
+        print_single_wall();
         for (i = 0; i < GAME_MAP_WIDTH; i++)
             printf("%c", gameMap[i][j]);
-        printf("#\n");
+        print_single_wall();
+        printf("\n");
     }
-    printf("%s\n", horizontal_border);
+    print_horizontal_border();
 }
 
 void clear_map(GameMap gameMap) {
