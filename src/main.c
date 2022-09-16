@@ -5,6 +5,7 @@
 #include "consts.h"
 #include "game_print.h"
 #include "logic/snake.h"
+#include "logic/apple.h"
 
 void initialise_game_state(GameState *gameState) {
     Snake *segment = (Snake*) malloc(sizeof(Snake));
@@ -26,6 +27,8 @@ void pause_for(int milliseconds) {
 
 void mainloop(GameState *gameState) {
     while(1) {
+        if(gameState->apple == NULL)
+            place_apple(gameState);
         read_input(&gameState->snakeHead);
         move_snake(gameState);
         print_game(gameState);
@@ -56,5 +59,6 @@ int main() {
     GameState gameState;
     initialise_game_state(&gameState);
     initialise_printing();
+    clear_map(gameState.gameMap);
     mainloop(&gameState);
 }

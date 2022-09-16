@@ -29,7 +29,7 @@ void print_char(char c) {
             printf("32");
             break;
         case '*':
-            printf("41");
+            printf("31");
             break;
         default:
             printf("0");
@@ -69,6 +69,10 @@ void draw_snake(GameState *gameState) {
     }
 }
 
+void draw_apple(GameState *gameState) {
+    gameState->gameMap[gameState->apple->x][gameState->apple->y] = '*';
+}
+
 void print_game(GameState *gameState) {
     printf("\e[1;1H\e[2J"); // clears the screen
     printf("Snake Game\n");
@@ -76,6 +80,7 @@ void print_game(GameState *gameState) {
     clear_map(gameState->gameMap);
 
     draw_snake(gameState);
+    draw_apple(gameState);
 
     print_map(gameState->gameMap);
 }
