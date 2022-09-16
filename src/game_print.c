@@ -22,13 +22,30 @@ void print_single_wall() {
            "\033[m");
 }
 
+void print_char(char c) {
+    printf("\033[");
+    switch(c) {
+        case 'o':
+            printf("32");
+            break;
+        case '*':
+            printf("41");
+            break;
+        default:
+            printf("0");
+            break;
+    }
+    printf("m%c", c);
+    printf("\033[m");
+}
+
 void print_map(GameMap gameMap) {
     print_horizontal_border();
     int i, j;
     for (j = 0; j < GAME_MAP_HEIGHT; j++) {
         print_single_wall();
         for (i = 0; i < GAME_MAP_WIDTH; i++)
-            printf("%c", gameMap[i][j]);
+            print_char(gameMap[i][j]);
         print_single_wall();
         printf("\n");
     }
