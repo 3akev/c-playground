@@ -1,13 +1,17 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "termios.h"
 #include "consts.h"
 #include "game_print.h"
 #include "logic/snake.h"
 #include "logic/apple.h"
+#include "logic/collisions.h"
 
 void initialise_game_state(GameState *gameState) {
+    gameState->isAlive = 1;
+    gameState->apple = NULL;
     Snake *segment = (Snake*) malloc(sizeof(Snake));
     srand(time(NULL));
     gameState->snakeHead.position.x = GAME_MAP_WIDTH/2;
@@ -26,14 +30,16 @@ void pause_for(int milliseconds) {
 }
 
 void mainloop(GameState *gameState) {
-    while(1) {
+    while(gameState->isAlive) {
+        read_input(&gameState->snakeHead);
+        check_for_collisions(gameState);
+        move_snake(gameState);
         if(gameState->apple == NULL)
             place_apple(gameState);
-        read_input(&gameState->snakeHead);
-        move_snake(gameState);
         print_game(gameState);
-        pause_for(500);
+        pause_for(200);
     }
+    printf("GAME OVER!\n");
 }
 
 struct termios orig_termios;

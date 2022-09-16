@@ -14,6 +14,7 @@ typedef struct PointStruct {
     char y;
 } Point;
 
+extern const Point Direction[4];
 
 typedef struct SnakeStruct {
     Point position;
@@ -24,6 +25,7 @@ typedef struct SnakeStruct {
 
 typedef struct GameStateStruct {
     GameMap gameMap;
+    char isAlive;
     Snake snakeHead;
     Point *apple;
 } GameState;

@@ -2,9 +2,6 @@
 #include <unistd.h>
 #include "snake.h"
 
-// 0=UP, 1=RIGHT, 2=DOWN, 3=LEFT
-const Point Direction[4] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
-
 void move_segments(Snake *segment) {
     Point currentSegmentPos, nextSegmentPos;
     currentSegmentPos = segment->position;
@@ -29,6 +26,7 @@ void move_snake(GameState *gameState) {
 void read_input(Snake *snakeHead) {
     char x;
     read(STDIN_FILENO, &x, 1);
+    // 0=UP, 1=RIGHT, 2=DOWN, 3=LEFT
     switch(x) {
         case 'w':
             snakeHead->direction = 0;

@@ -79,8 +79,9 @@ void print_game(GameState *gameState) {
 
     clear_map(gameState->gameMap);
 
-    draw_snake(gameState);
     draw_apple(gameState);
+    draw_snake(gameState);
+
 
     print_map(gameState->gameMap);
 }
