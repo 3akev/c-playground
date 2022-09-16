@@ -4,7 +4,7 @@
 #include "termios.h"
 #include "consts.h"
 #include "game_print.h"
-#include "logic.h"
+#include "logic/snake.h"
 
 void initialise_game_state(GameState *gameState) {
     Snake *segment = (Snake*) malloc(sizeof(Snake));
