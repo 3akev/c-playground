@@ -14,6 +14,13 @@ typedef struct PointStruct {
     char y;
 } Point;
 
+enum DIRECTIONS {
+    UP = 0,
+    RIGHT = 1,
+    DOWN = 2,
+    LEFT = 3
+};
+
 extern const Point Direction[4];
 
 typedef struct SnakeStruct {
@@ -24,8 +31,7 @@ typedef struct SnakeStruct {
 typedef struct GameStateStruct {
     GameMap gameMap;
     char isAlive;
-    // 0=UP, 1=RIGHT, 2=DOWN, 3=LEFT
-    char snakeDirection;
+    enum DIRECTIONS snakeDirection;
     Snake snakeHead;
     Point *apple;
 } GameState;

@@ -22,7 +22,7 @@ void initialise_game_state(GameState *gameState) {
 
 void mainloop(GameState *gameState) {
     while(gameState->isAlive) {
-        pause_for(150);
+        pause_for(100);
         read_input(gameState);
         check_for_collisions(gameState);
         if(gameState->isAlive)
