@@ -3,13 +3,9 @@
 #include <time.h>
 #include "apple.h"
 
-struct EmptyPoints {
-    Point *point;
-    short length;
-};
+Point emptyPointsArray[GAME_MAP_WIDTH*GAME_MAP_HEIGHT];
 
-struct EmptyPoints get_empty_points(GameState *gameState) {
-    Point *point = (Point*) malloc(GAME_MAP_WIDTH*GAME_MAP_HEIGHT*sizeof(Point));
+short get_empty_points(GameState *gameState) {
     short idx = 0;
 
     char i, j;
@@ -17,22 +13,19 @@ struct EmptyPoints get_empty_points(GameState *gameState) {
         for(j=0;j<GAME_MAP_HEIGHT; j++)
             if (gameState->gameMap[i][j] == ' ') {
                 Point p = {i, j};
-                point[idx++] = p;
+                emptyPointsArray[idx++] = p;
             }
 
-    struct EmptyPoints result = {point, --idx};
-    return result;
+    return --idx;
 }
 
 Point *get_random_empty_point(GameState *gameState) {
-    struct EmptyPoints emptyPoints = get_empty_points(gameState);
+    short length = get_empty_points(gameState);
 
     srand(time(NULL));
-    short idx = rand() % (emptyPoints.length+1);
+    short idx = rand() % (length+1);
 
-    Point *p = (Point*) malloc(sizeof(Point));
-    *p = emptyPoints.point[idx];
-    free(emptyPoints.point);
+    Point *p = emptyPointsArray + idx;
     return p;
 }
 

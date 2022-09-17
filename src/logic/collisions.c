@@ -2,7 +2,6 @@
 #include "collisions.h"
 
 void eat_apple(GameState *gameState) {
-    free(gameState->apple);
     gameState->apple = NULL;
 
     // grow snake
