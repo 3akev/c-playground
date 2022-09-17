@@ -3,8 +3,8 @@
 
 #include "../consts.h"
 
-void print_game(GameState *gameState);
+void initialise_printing();
 
-void initialise_printing(GameMap gameMap);
+void print_game(GameState *gameState);
 
 #endif //SNAKE_GAME_GAME_PRINT_H

@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "consts.h"
-#include "view/game_print.h"
 #include "logic/snake.h"
 #include "logic/apple.h"
 #include "logic/collisions.h"
 #include "view/terminal_tools.h"
+#include "view/game_print.h"
+#include "view/draw_game.h"
 
 void initialise_game_state(GameState *gameState) {
     gameState->isAlive = 1;
@@ -39,7 +40,8 @@ int main() {
 
     GameState gameState;
     initialise_game_state(&gameState);
-    initialise_printing(gameState.gameMap);
+    initialise_printing();
+    clear_map(gameState.gameMap);
 
     mainloop(&gameState);
 }

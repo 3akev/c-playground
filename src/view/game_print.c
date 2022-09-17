@@ -1,7 +1,15 @@
 #include <stdio.h>
 #include "game_print.h"
+#include "draw_game.h"
 
 char horizontal_border[GAME_MAP_WIDTH + 3];
+
+void initialise_printing() {
+    int i;
+    for (i = 0; i < GAME_MAP_WIDTH + 2; i++)
+        horizontal_border[i] = '#';
+    horizontal_border[i] = 0;
+}
 
 void print_horizontal_border() {
     printf("\033[47m"  // white background
@@ -16,18 +24,12 @@ void print_single_wall() {
 }
 
 void print_char_with_color(char ch) {
-    char color;
-    switch(ch) {
-        case SNAKE_DISPLAY_CHAR:
-            color = 32; // green
-            break;
-        case APPLE_DISPLAY_CHAR:
-            color = 31; // red
-            break;
-        default:
-            color = 0; // white
-            break;
-    }
+    char color = 0; // white
+    if(ch == SNAKE_DISPLAY_CHAR)
+        color = 32; // green
+    else if (ch == APPLE_DISPLAY_CHAR)
+        color = 31; // red
+
     printf("\033[%dm"
            "%c"
            "\033[m", color, ch);
@@ -46,42 +48,10 @@ void print_map(GameMap gameMap) {
     print_horizontal_border();
 }
 
-void clear_map(GameMap gameMap) {
-    int i, j;
-    for (i = 0; i < GAME_MAP_WIDTH; i++)
-        for (j = 0; j < GAME_MAP_HEIGHT; j++)
-            gameMap[i][j] = ' ';
-}
-
-void draw_snake(GameState *gameState) {
-    Snake *segment = &gameState->snakeHead;
-    while (segment != NULL) {
-        gameState->gameMap[segment->position.x][segment->position.y] = SNAKE_DISPLAY_CHAR;
-        segment = segment->next;
-    }
-}
-
-void draw_apple(GameState *gameState) {
-    gameState->gameMap[gameState->apple->x][gameState->apple->y] = APPLE_DISPLAY_CHAR;
-}
-
 void print_game(GameState *gameState) {
     printf("\e[1;1H\e[2J"); // clears the screen
     printf("Snake Game\n");
 
-    clear_map(gameState->gameMap);
-
-    draw_apple(gameState);
-    draw_snake(gameState);
-
+    redraw_game(gameState);
     print_map(gameState->gameMap);
-}
-
-void initialise_printing(GameMap gameMap) {
-    int i;
-    for (i = 0; i < GAME_MAP_WIDTH + 2; i++)
-        horizontal_border[i] = '#';
-    horizontal_border[i] = 0;
-
-    clear_map(gameMap);
 }
