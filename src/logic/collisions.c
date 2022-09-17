@@ -2,6 +2,8 @@
 #include "collisions.h"
 #include "snake.h"
 
+const Point Direction[4] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
+
 int is_out_of_bounds(Point *position) {
     return (*position).x < 0 || (*position).x >= GAME_MAP_WIDTH || (*position).y < 0 || (*position).y >= GAME_MAP_HEIGHT;
 }

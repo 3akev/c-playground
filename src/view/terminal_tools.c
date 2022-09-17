@@ -16,8 +16,8 @@ void disableRawMode() {
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
 }
 
-// This enables raw mode to allow capturing input without blocking the terminal
-// derived from https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
+/* This enables raw mode to allow capturing input without blocking the terminal
+ * derived from https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html */
 void enableRawMode() {
     tcgetattr(STDIN_FILENO, &orig_termios);
     atexit(disableRawMode);

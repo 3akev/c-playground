@@ -16,20 +16,21 @@ void print_single_wall() {
 }
 
 void print_char_with_color(char ch) {
-    printf("\033[");
+    char color;
     switch(ch) {
         case SNAKE_DISPLAY_CHAR:
-            printf("32"); // green
+            color = 32; // green
             break;
         case APPLE_DISPLAY_CHAR:
-            printf("31"); // red
+            color = 31; // red
             break;
         default:
-            printf("0"); // white
+            color = 0; // white
             break;
     }
-    printf("m%c", ch);
-    printf("\033[m");
+    printf("\033[%dm"
+           "%c"
+           "\033[m", color, ch);
 }
 
 void print_map(GameMap gameMap) {

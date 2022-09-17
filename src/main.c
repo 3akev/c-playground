@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "consts.h"
-#include "game_print.h"
+#include "view/game_print.h"
 #include "logic/snake.h"
 #include "logic/apple.h"
 #include "logic/collisions.h"
-#include "terminal_tools.h"
+#include "view/terminal_tools.h"
 
 void initialise_game_state(GameState *gameState) {
     gameState->isAlive = 1;
