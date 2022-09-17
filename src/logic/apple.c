@@ -4,6 +4,7 @@
 
 Point emptyPointsArray[GAME_MAP_WIDTH*GAME_MAP_HEIGHT];
 
+// this fills the array declared above with empty points, returning the last valid index
 short get_empty_points(GameState *gameState) {
     short idx = 0;
 
@@ -18,16 +19,11 @@ short get_empty_points(GameState *gameState) {
     return --idx;
 }
 
-Point *get_random_empty_point(GameState *gameState) {
+void place_apple(GameState *gameState) {
     short length = get_empty_points(gameState);
 
     srand(time(NULL));
-    short idx = rand() % (length+1);
+    short idx = rand() % (length + 1);
 
-    Point *p = emptyPointsArray + idx;
-    return p;
-}
-
-void place_apple(GameState *gameState) {
-    gameState->apple = get_random_empty_point(gameState);
+    gameState->apple = emptyPointsArray + idx;
 }

@@ -3,7 +3,7 @@
 
 #include "../consts.h"
 
-void read_input(Snake *snakeHead);
+void read_input(GameState *gameState);
 
 void move_snake(GameState *gameState);
 

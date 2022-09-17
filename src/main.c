@@ -14,7 +14,7 @@ void initialise_game_state(GameState *gameState) {
     gameState->snakeHead.position.x = GAME_MAP_WIDTH/2;
     gameState->snakeHead.position.y = GAME_MAP_HEIGHT/2;
     srand(time(NULL));
-    gameState->snakeHead.direction = rand() % 4;
+    gameState->snakeDirection = rand() % 4;
 
     // add a segment so the game starts with 2 segments
     add_segment(&gameState->snakeHead);
@@ -23,7 +23,7 @@ void initialise_game_state(GameState *gameState) {
 void mainloop(GameState *gameState) {
     while(gameState->isAlive) {
         pause_for(150);
-        read_input(&gameState->snakeHead);
+        read_input(gameState);
         check_for_collisions(gameState);
         if(gameState->isAlive)
             move_snake(gameState);

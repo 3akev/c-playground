@@ -18,14 +18,14 @@ extern const Point Direction[4];
 
 typedef struct SnakeStruct {
     Point position;
-    // 0=UP, 1=RIGHT, 2=DOWN, 3=LEFT
-    char direction;
     struct SnakeStruct *next;
 } Snake;
 
 typedef struct GameStateStruct {
     GameMap gameMap;
     char isAlive;
+    // 0=UP, 1=RIGHT, 2=DOWN, 3=LEFT
+    char snakeDirection;
     Snake snakeHead;
     Point *apple;
 } GameState;
