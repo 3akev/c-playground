@@ -9,7 +9,7 @@
 
 typedef char GameMap[GAME_MAP_WIDTH][GAME_MAP_HEIGHT];
 
-typedef struct PointStruct {
+typedef struct {
     char x;
     char y;
 } Point;
@@ -28,7 +28,7 @@ typedef struct SnakeStruct {
     struct SnakeStruct *next;
 } Snake;
 
-typedef struct GameStateStruct {
+typedef struct {
     GameMap gameMap;
     char isAlive;
     enum DIRECTIONS snakeDirection;
