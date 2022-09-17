@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "game_print.h"
+#include "print_game.h"
 #include "draw_game.h"
 
 char horizontal_border[GAME_MAP_WIDTH + 3];

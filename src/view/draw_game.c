@@ -3,7 +3,7 @@
 //
 
 #include <stddef.h>
-#include "game_print.h"
+#include "print_game.h"
 #include "draw_game.h"
 
 void clear_map(GameMap gameMap) {

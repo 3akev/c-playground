@@ -4,7 +4,7 @@
 #include "logic/apple.h"
 #include "logic/collisions.h"
 #include "view/terminal_tools.h"
-#include "view/game_print.h"
+#include "view/print_game.h"
 #include "view/draw_game.h"
 
 void initialise_game_state(GameState *gameState) {
