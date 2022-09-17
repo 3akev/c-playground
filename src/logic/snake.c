@@ -1,6 +1,17 @@
-#include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "snake.h"
+
+void add_segment(Snake *segment) {
+    while(segment->next != NULL)
+        segment = segment->next;
+
+    // This is never freed before exiting the program
+    Snake *segment2 = (Snake*) malloc(sizeof(Snake));
+    segment2->position.x = segment->position.x;
+    segment2->position.y = segment->position.y;
+    segment->next = segment2;
+}
 
 void move_segments(Snake *segment) {
     Point currentSegmentPos, nextSegmentPos;

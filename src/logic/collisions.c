@@ -1,18 +1,11 @@
-#include <malloc.h>
+#include <stddef.h>
 #include "collisions.h"
+#include "snake.h"
 
 void eat_apple(GameState *gameState) {
     gameState->apple = NULL;
 
-    // grow snake
-    Snake *segment = gameState->snakeHead.next;
-    while(segment->next != NULL)
-        segment = segment->next;
-
-    Snake *segment2 = (Snake*) malloc(sizeof(Snake));
-    segment2->position.x = segment->position.x;
-    segment2->position.y = segment->position.y;
-    segment->next = segment2;
+    add_segment(&gameState->snakeHead);
 }
 
 void check_for_collisions(GameState *gameState) {

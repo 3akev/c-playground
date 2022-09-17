@@ -3,28 +3,21 @@
 
 char horizontal_border[GAME_MAP_WIDTH + 3];
 
-void initialise_printing() {
-    int i;
-    for (i = 0; i < GAME_MAP_WIDTH + 2; i++)
-        horizontal_border[i] = '#';
-    horizontal_border[i] = 0;
-}
-
 void print_horizontal_border() {
-    printf("\033[47m"
+    printf("\033[47m"  // white background
            "%s"
            "\033[m\n", horizontal_border);
 }
 
 void print_single_wall() {
-    printf("\033[47m"
+    printf("\033[47m" // white background
            "#"
            "\033[m");
 }
 
-void print_char(char c) {
+void print_char_with_color(char ch) {
     printf("\033[");
-    switch(c) {
+    switch(ch) {
         case SNAKE_DISPLAY_CHAR:
             printf("32"); // green
             break;
@@ -35,7 +28,7 @@ void print_char(char c) {
             printf("0"); // white
             break;
     }
-    printf("m%c", c);
+    printf("m%c", ch);
     printf("\033[m");
 }
 
@@ -45,7 +38,7 @@ void print_map(GameMap gameMap) {
     for (j = 0; j < GAME_MAP_HEIGHT; j++) {
         print_single_wall();
         for (i = 0; i < GAME_MAP_WIDTH; i++)
-            print_char(gameMap[i][j]);
+            print_char_with_color(gameMap[i][j]);
         print_single_wall();
         printf("\n");
     }
@@ -62,9 +55,7 @@ void clear_map(GameMap gameMap) {
 void draw_snake(GameState *gameState) {
     Snake *segment = &gameState->snakeHead;
     while (segment != NULL) {
-        int x = segment->position.x;
-        int y = segment->position.y;
-        gameState->gameMap[x][y] = SNAKE_DISPLAY_CHAR;
+        gameState->gameMap[segment->position.x][segment->position.y] = SNAKE_DISPLAY_CHAR;
         segment = segment->next;
     }
 }
@@ -82,6 +73,14 @@ void print_game(GameState *gameState) {
     draw_apple(gameState);
     draw_snake(gameState);
 
-
     print_map(gameState->gameMap);
+}
+
+void initialise_printing(GameMap gameMap) {
+    int i;
+    for (i = 0; i < GAME_MAP_WIDTH + 2; i++)
+        horizontal_border[i] = '#';
+    horizontal_border[i] = 0;
+
+    clear_map(gameMap);
 }

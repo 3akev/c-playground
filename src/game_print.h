@@ -5,8 +5,6 @@
 
 void print_game(GameState *gameState);
 
-void clear_map(GameMap gameMap);
-
-void initialise_printing();
+void initialise_printing(GameMap gameMap);
 
 #endif //SNAKE_GAME_GAME_PRINT_H
