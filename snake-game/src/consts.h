@@ -10,30 +10,27 @@
 typedef char GameMap[GAME_MAP_WIDTH][GAME_MAP_HEIGHT];
 
 typedef struct {
-    char x;
-    char y;
+  char x;
+  char y;
 } Point;
 
-enum DIRECTIONS {
-    UP = 0,
-    RIGHT = 1,
-    DOWN = 2,
-    LEFT = 3
-};
+enum DIRECTIONS { UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3 };
 
 extern const Point Direction[4];
 
 typedef struct SnakeStruct {
-    Point position;
-    struct SnakeStruct *next;
+  Point position;
+  struct SnakeStruct *prev;
+  struct SnakeStruct *next;
 } Snake;
 
 typedef struct {
-    GameMap gameMap;
-    char isAlive;
-    enum DIRECTIONS snakeDirection;
-    Snake snakeHead;
-    Point *apple;
+  GameMap gameMap;
+  char isAlive;
+  enum DIRECTIONS snakeDirection;
+  Snake *snakeHead;
+  Snake *snakeTail;
+  Point *apple;
 } GameState;
 
-#endif //SNAKE_GAME_CONSTS_H
+#endif // SNAKE_GAME_CONSTS_H

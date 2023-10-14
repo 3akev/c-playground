@@ -1,56 +1,46 @@
-#include <unistd.h>
-#include <stdlib.h>
 #include "snake.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-void add_segment(Snake *segment) {
-    while(segment->next != NULL)
-        segment = segment->next;
-
-    // This is never freed before exiting the program, it's always needed while the program is running
-    Snake *segment2 = (Snake*) malloc(sizeof(Snake));
-    segment2->position.x = segment->position.x;
-    segment2->position.y = segment->position.y;
-    segment->next = segment2;
-}
-
-/* this moves each segment n to the position of segment n-1 in the linked list.
- * the segment given as an argument isn't moved. */
-void move_segments(Snake *segment) {
-    Point previousPosition, tmp;
-    previousPosition = segment->position;
-
-    while(segment->next != NULL) {
-        segment = segment->next;
-        tmp = segment->position;
-        segment->position = previousPosition;
-        previousPosition = tmp;
-    }
+void add_segment(GameState *gameState) {
+  Snake *segment2 = (Snake *)malloc(sizeof(Snake));
+  segment2->position.x = gameState->snakeTail->position.x;
+  segment2->position.y = gameState->snakeTail->position.y;
+  gameState->snakeTail->next = segment2;
+  segment2->prev = gameState->snakeTail;
+  segment2->next = NULL;
+  gameState->snakeTail = segment2;
 }
 
 void move_snake(GameState *gameState) {
-    move_segments(&gameState->snakeHead);
+  Point vector = Direction[gameState->snakeDirection];
+  Point newpos = gameState->snakeHead->position;
+  newpos.x += vector.x;
+  newpos.y += vector.y;
 
-    Point vector = Direction[gameState->snakeDirection];
-    gameState->snakeHead.position.x += vector.x;
-    gameState->snakeHead.position.y += vector.y;
+  Snake *newHead = gameState->snakeTail;
+  Snake *oldHead = gameState->snakeHead;
+
+  Snake *newTail = gameState->snakeTail->prev;
+
+  newHead->prev = NULL;
+  newHead->next = oldHead;
+
+  newHead->position = newpos;
+
+  oldHead->prev = newHead;
+
+  newTail->next = NULL;
+
+  gameState->snakeHead = newHead;
+  gameState->snakeTail = newTail;
 }
 
-void read_input(GameState *gameState) {
-    char x;
-    read(STDIN_FILENO, &x, 1);
-
-    switch(x) {
-        case 'w':
-            gameState->snakeDirection = UP;
-            break;
-        case 'a':
-            gameState->snakeDirection = LEFT;
-            break;
-        case 's':
-            gameState->snakeDirection = DOWN;
-            break;
-        case 'd':
-            gameState->snakeDirection = RIGHT;
-            break;
-    }
+void free_snake(GameState *gameState) {
+  Snake *segment = gameState->snakeHead;
+  while (segment != NULL) {
+    Snake *next = segment->next;
+    free(segment);
+    segment = next;
+  }
 }

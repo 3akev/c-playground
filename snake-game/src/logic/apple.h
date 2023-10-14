@@ -5,4 +5,4 @@
 
 void place_apple(GameState *gameState);
 
-#endif //SNAKE_GAME_APPLE_H
+#endif // SNAKE_GAME_APPLE_H

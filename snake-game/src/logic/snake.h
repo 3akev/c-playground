@@ -7,6 +7,8 @@ void read_input(GameState *gameState);
 
 void move_snake(GameState *gameState);
 
-void add_segment(Snake *snake);
+void add_segment(GameState *gameState);
 
-#endif //SNAKE_GAME_SNAKE_H
+void free_snake(GameState *gameState);
+
+#endif // SNAKE_GAME_SNAKE_H
