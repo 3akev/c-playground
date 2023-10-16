@@ -7,31 +7,50 @@
 #include "view/print_game.h"
 #include "view/terminal_tools.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+int playSpeed = 100;
+int mapWidth = 16;
+int mapHeight = 16;
 
 void initialise_game_state(GameState *gameState) {
+  gameState->score = 0;
   gameState->isAlive = 1;
   gameState->apple = NULL;
 
   // place snake in middle with random starting direction
   gameState->snakeHead = malloc(sizeof(Snake));
-  gameState->snakeHead->position.x = GAME_MAP_WIDTH / 2;
-  gameState->snakeHead->position.y = GAME_MAP_HEIGHT / 2;
+  gameState->snakeHead->position.x = mapWidth / 2;
+  gameState->snakeHead->position.y = mapHeight / 2;
   gameState->snakeHead->next = gameState->snakeTail;
   gameState->snakeHead->prev = NULL;
 
   gameState->snakeTail = malloc(sizeof(Snake));
-  gameState->snakeTail->position.x = GAME_MAP_WIDTH / 2;
-  gameState->snakeTail->position.y = GAME_MAP_HEIGHT / 2;
+  gameState->snakeTail->position.x = mapWidth / 2;
+  gameState->snakeTail->position.y = mapHeight / 2;
   gameState->snakeTail->next = NULL;
   gameState->snakeTail->prev = gameState->snakeHead;
 
   srand(time(NULL));
   gameState->snakeDirection = rand() % 4;
+
+  gameState->gameMap = malloc(mapWidth * sizeof(char *));
+  for (int i = 0; i < mapWidth; i++)
+    gameState->gameMap[i] = malloc(mapHeight * sizeof(char));
+}
+
+void free_game_state(GameState *gameState) {
+  free_apple();
+
+  free_snake(gameState);
+  for (int i = 0; i < mapWidth; i++)
+    free(gameState->gameMap[i]);
+  free(gameState->gameMap);
 }
 
 void mainloop(GameState *gameState) {
   while (gameState->isAlive) {
-    pause_for(100);
+    pause_for(playSpeed);
     read_input(gameState);
     check_for_collisions(gameState);
     if (gameState->isAlive)
@@ -40,17 +59,37 @@ void mainloop(GameState *gameState) {
       place_apple(gameState);
     print_game(gameState);
   }
-  free_snake(gameState);
+  free_game_state(gameState);
   printf("GAME OVER!\n");
 }
 
-int main() {
+int main(int argc, char **argv) {
+  const char helpstr[] = ("usage: ./snake [options]\n"
+                          "options:\n"
+                          "\t-h: print help\n"
+                          "\t-s: set game speed\n"
+                          "\t-d: set map width x height\n");
+
+  int optchar;
+  while ((optchar = getopt(argc, argv, "hs:d:")) != -1) {
+    switch (optchar) {
+    case 'h':
+      printf(helpstr);
+      exit(0);
+    case 's':
+      playSpeed = atoi(optarg);
+      break;
+    case 'd':
+      sscanf(optarg, "%d x %d", &mapWidth, &mapHeight);
+      break;
+    }
+  }
+
   GameState gameState;
 
   enableRawMode();
 
   initialise_game_state(&gameState);
-  initialise_printing();
   clear_map(gameState.gameMap);
 
   mainloop(&gameState);

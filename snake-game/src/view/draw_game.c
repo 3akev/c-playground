@@ -1,14 +1,11 @@
-//
-// Created by ala on 17/09/22.
-//
-
 #include "draw_game.h"
+#include "../consts.h"
 #include <stddef.h>
 
 void clear_map(GameMap gameMap) {
   int i, j;
-  for (i = 0; i < GAME_MAP_WIDTH; i++)
-    for (j = 0; j < GAME_MAP_HEIGHT; j++)
+  for (i = 0; i < mapWidth; i++)
+    for (j = 0; j < mapHeight; j++)
       gameMap[i][j] = ' ';
 }
 

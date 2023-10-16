@@ -1,26 +1,20 @@
 #include "print_game.h"
+#include "../consts.h"
 #include "draw_game.h"
 #include <stdio.h>
-
-char horizontal_border[GAME_MAP_WIDTH + 3];
-
-void initialise_printing() {
-  int i;
-  for (i = 0; i < GAME_MAP_WIDTH + 2; i++)
-    horizontal_border[i] = '#';
-  horizontal_border[i] = 0;
-}
+#include <stdlib.h>
 
 void print_horizontal_border() {
-  printf("\033[47m" // white background
-         "%s"
-         "\033[m\n",
-         horizontal_border);
+  printf("\033[47m"); // white background
+  int i;
+  for (i = 0; i < 2 * (mapWidth + 2); i++)
+    printf("#");
+  printf("\033[m\n");
 }
 
 void print_single_wall() {
   printf("\033[47m" // white background
-         "#"
+         " #"
          "\033[m");
 }
 
@@ -39,7 +33,7 @@ void print_char_with_color(char ch) {
   };
 
   printf("\033[%dm"
-         "%c"
+         " %c"
          "\033[m",
          color, ch);
 }
@@ -47,9 +41,9 @@ void print_char_with_color(char ch) {
 void print_map(GameMap gameMap) {
   print_horizontal_border();
   int i, j;
-  for (j = 0; j < GAME_MAP_HEIGHT; j++) {
+  for (j = 0; j < mapHeight; j++) {
     print_single_wall();
-    for (i = 0; i < GAME_MAP_WIDTH; i++)
+    for (i = 0; i < mapWidth; i++)
       print_char_with_color(gameMap[i][j]);
     print_single_wall();
     printf("\n");
@@ -59,7 +53,7 @@ void print_map(GameMap gameMap) {
 
 void print_game(GameState *gameState) {
   printf("\e[1;1H\e[2J"); // clears the screen
-  printf("Snake Game\n");
+  printf("Snake Game\tScore : %ld\n", gameState->score);
 
   redraw_game(gameState);
   print_map(gameState->gameMap);
