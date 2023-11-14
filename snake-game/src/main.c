@@ -6,6 +6,7 @@
 #include "view/input.h"
 #include "view/print_game.h"
 #include "view/terminal_tools.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -64,20 +65,20 @@ void mainloop(GameState *gameState) {
 }
 
 int main(int argc, char **argv) {
-  const char helpstr[] = ("usage: ./snake [options]\n"
-                          "options:\n"
-                          "\t-h: print help\n"
-                          "\t-s: set game speed\n"
-                          "\t-d: set map width x height\n");
+  const char *helpstr = ("usage: %s [options]\n"
+                         "options:\n"
+                         "\t-h: print help\n"
+                         "\t-s: set game speed (default 1)\n"
+                         "\t-d: set map width x height (default 16 x 16)\n");
 
   int optchar;
   while ((optchar = getopt(argc, argv, "hs:d:")) != -1) {
     switch (optchar) {
     case 'h':
-      printf(helpstr);
+      printf(helpstr, argv[0]);
       exit(0);
     case 's':
-      playSpeed = atoi(optarg);
+      playSpeed = (int)(100 / atof(optarg));
       break;
     case 'd':
       sscanf(optarg, "%d x %d", &mapWidth, &mapHeight);
